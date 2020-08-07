@@ -17,6 +17,6 @@ public class ExitButton : MonoBehaviour {
     }
 
     public void OnPress() {
-        // Application.Quit();
+        Application.Quit();
     }
 }
