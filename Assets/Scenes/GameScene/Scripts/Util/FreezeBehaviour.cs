@@ -6,9 +6,9 @@ public class FreezeBehaviour : MonoBehaviour
 {
     public bool grayscaleOnPause = false;
 
-    public Material normalMaterial;
     public Material grayscaleMaterial;
 
+    private Material normalMaterial;
     private Renderer renderer;
     private TimeStop timeStop;
 
@@ -16,6 +16,10 @@ public class FreezeBehaviour : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            normalMaterial = renderer.material;
+        }
         timeStop = ScriptableObject.CreateInstance<TimeStop>();
     }
 
