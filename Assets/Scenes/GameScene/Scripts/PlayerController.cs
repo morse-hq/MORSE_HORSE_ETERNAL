@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour {
 
     private bool grounded; // SET GROUNDED TO TRUE WHEN IT COLLIDES WITH FLOOR
 
+    public Vector3 direction;
+
     void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -48,6 +50,18 @@ public class PlayerController : MonoBehaviour {
         }
         else {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
+        }
+
+        // flips based on your velocity
+        if (velocity.x > 0)
+        {
+            direction = Vector3.right;
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            direction = Vector3.left;
+            GetComponent<SpriteRenderer>().flipX = false;
         }
 
         velocity.y += Physics2D.gravity.y * Time.deltaTime;

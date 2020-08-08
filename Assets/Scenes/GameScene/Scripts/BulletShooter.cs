@@ -20,7 +20,7 @@ public class BulletShooter : MonoBehaviour
         {
             GameObject bulletObject = Instantiate(bulletPrefab);
             bulletObject.transform.position = this.transform.position;
-            bulletObject.transform.position += Vector3.left;
+            bulletObject.transform.position += GetComponent<PlayerController>().direction;
         }
     }
 }
