@@ -5,11 +5,15 @@ using UnityEngine;
 public class FreezeBehaviour : MonoBehaviour
 {
     public bool grayscaleOnPause = false;
+    public bool freezeLocOnPause = false;
 
     public Material grayscaleMaterial;
 
-    private Material normalMaterial;
     private Renderer renderer;
+    private Material normalMaterial;
+
+    private Rigidbody2D rigidbody;
+
     private TimeStop timeStop;
 
     // Start is called before the first frame update
@@ -20,6 +24,9 @@ public class FreezeBehaviour : MonoBehaviour
         {
             normalMaterial = renderer.material;
         }
+
+        rigidbody = GetComponent<Rigidbody2D>();
+
         timeStop = ScriptableObject.CreateInstance<TimeStop>();
     }
 
@@ -30,6 +37,11 @@ public class FreezeBehaviour : MonoBehaviour
         {
             // change material to grayscale if time is stopped
             renderer.material = timeStop.getIsTimeStopped() ? grayscaleMaterial : normalMaterial;
+        }
+
+        if (freezeLocOnPause && rigidbody != null)
+        {
+            rigidbody.constraints = timeStop.getIsTimeStopped() ? RigidbodyConstraints2D.FreezeAll : RigidbodyConstraints2D.FreezeRotation;
         }
     }
 }
