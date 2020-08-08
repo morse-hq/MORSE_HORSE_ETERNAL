@@ -15,11 +15,15 @@ public class CameraLockToPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3
-            (
-                playerGameObject.transform.position.x,
-                playerGameObject.transform.position.y,
-                -10
-            );
+        // don't lock on when the player is dead
+        if (playerGameObject != null)
+        {
+            transform.position = new Vector3
+                (
+                    playerGameObject.transform.position.x,
+                    playerGameObject.transform.position.y,
+                    -10
+                );
+        }
     }
 }
