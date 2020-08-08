@@ -4,21 +4,27 @@ using UnityEngine;
 
 public class BulletNyoom : MonoBehaviour
 {
-    public Vector3 direction;
+    public Vector2 direction;
 
     public int bulletSpeed = 5;
 
     private Rigidbody2D myRigidBody;
 
+    private TimeStop timeStop;
+
     // Start is called before the first frame update
     void Start()
     {
         myRigidBody = GetComponent<Rigidbody2D>();
+        timeStop = ScriptableObject.CreateInstance<TimeStop>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        myRigidBody.velocity = direction * bulletSpeed;
+        if (!timeStop.getIsTimeStopped())
+        {
+            myRigidBody.position += direction * bulletSpeed * Time.deltaTime;
+        }
     }
 }
