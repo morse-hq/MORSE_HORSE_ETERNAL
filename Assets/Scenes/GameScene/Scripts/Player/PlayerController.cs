@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rigidbody;
 
-    private Vector2 velocity;
-
     private bool grounded; // SET GROUNDED TO TRUE WHEN IT COLLIDES WITH FLOOR
 
     public Vector3 direction;
@@ -35,24 +33,21 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        // // Jumping
-        // if (grounded) {
-        //     velocity.y = 0;
-        //     if (Input.GetButtonDown("Jump")) {
-        //         // Calculate the velocity required to achieve the target jump height
-        //         velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-        //     }
-        // }
+        Vector2 velocity = rigidbody.velocity;
+
+        // Jumping
+        if (grounded)
+        {
+            if (Input.GetAxisRaw("Vertical") > 0)
+            {
+                // Calculate the velocity required to achieve the target jump height
+                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+                grounded = false;
+            }
+        }
 
         float acceleration = grounded ? walkAcceleration : airAcceleration;
         float deceleration = grounded ? groundDeceleration : 0;
-
-        // Jumping
-        float verticalInput = Input.GetAxisRaw("Jump");
-        if (velocity.y == 0) {
-            // Calculate the velocity required to achieve the target jump height
-            velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-        }
 
         // Moving left/right
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -69,17 +64,23 @@ public class PlayerController : MonoBehaviour {
             pointInDirection(Vector3.left);
         }
 
-        velocity.y += Physics2D.gravity.y * Time.deltaTime;
-
-        Debug.Log(velocity.y);
         rigidbody.velocity = velocity;
-
-        grounded = false;
     }
 
     private void pointInDirection(Vector3 newDirection)
     {
         direction = newDirection;
         GetComponent<SpriteRenderer>().flipX = newDirection == Vector3.right; // flip if you wanna face right
+    }
+
+    // there's a trigger on your feet
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        grounded = true;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        grounded = true;
     }
 }
