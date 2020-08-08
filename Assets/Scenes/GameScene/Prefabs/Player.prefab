@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d92f7fa74660123468e8fd192ded24a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 9
   walkAcceleration: 75
   airAcceleration: 30
   groundDeceleration: 70
