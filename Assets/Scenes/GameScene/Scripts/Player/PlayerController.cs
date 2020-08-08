@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 4;
 
-    private BoxCollider2D boxCollider;
+    private Collider2D boxCollider;
+
+    private Rigidbody2D rigidbody;
 
     private Vector2 velocity;
 
@@ -27,7 +29,8 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
 
     void Start() {
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<Collider2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
         pointInDirection(Vector3.right);
     }
 
@@ -67,7 +70,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
-        transform.Translate(velocity * Time.deltaTime);
+
+        Debug.Log(velocity.y);
+        rigidbody.velocity = velocity;
+
         grounded = false;
     }
 
