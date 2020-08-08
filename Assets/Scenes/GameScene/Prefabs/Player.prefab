@@ -149,6 +149,7 @@ MonoBehaviour:
   airAcceleration: 30
   groundDeceleration: 70
   jumpHeight: 4
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &9133451733177488941
 MonoBehaviour:
   m_ObjectHideFlags: 0
