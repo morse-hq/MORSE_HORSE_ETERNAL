@@ -45,8 +45,7 @@ public class PlayerController : MonoBehaviour {
         float moveInput = Input.GetAxisRaw("Horizontal");
         if (moveInput != 0) {
             velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
-        }
-        else {
+        } else {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
         }
 
