@@ -33,10 +33,8 @@ public class PlayerController : MonoBehaviour {
         Vector2 velocity = rigidbody.velocity;
 
         // Jumping
-        if (grounded)
-        {
-            if (Input.GetAxisRaw("Vertical") > 0)
-            {
+        if (grounded) {
+            if (Input.GetAxisRaw("Vertical") > 0) {
                 // Calculate the velocity required to achieve the target jump height
                 velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
                 grounded = false;
@@ -64,20 +62,17 @@ public class PlayerController : MonoBehaviour {
         rigidbody.velocity = velocity;
     }
 
-    private void pointInDirection(Vector3 newDirection)
-    {
+    private void pointInDirection(Vector3 newDirection) {
         direction = newDirection;
         GetComponent<SpriteRenderer>().flipX = newDirection == Vector3.right; // flip if you wanna face right
     }
 
     // there's a trigger on your feet
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    private void OnTriggerEnter2D(Collider2D collision) {
         grounded = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
+    private void OnTriggerStay2D(Collider2D collision) {
         grounded = true;
     }
 }
