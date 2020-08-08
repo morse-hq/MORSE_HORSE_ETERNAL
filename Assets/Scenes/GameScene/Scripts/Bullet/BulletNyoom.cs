@@ -24,7 +24,7 @@ public class BulletNyoom : MonoBehaviour
     {
         if (!timeStop.getIsTimeStopped())
         {
-            myRigidBody.position += direction * bulletSpeed * Time.deltaTime;
+            myRigidBody.velocity = direction * bulletSpeed;
         }
     }
 }
