@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
             direction = Vector3.right;
             GetComponent<SpriteRenderer>().flipX = true;
         }
-        else
+        else if (velocity.x < 0) // specifically do nothing when x = 0
         {
             direction = Vector3.left;
             GetComponent<SpriteRenderer>().flipX = false;
