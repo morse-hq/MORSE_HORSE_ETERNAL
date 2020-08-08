@@ -18,8 +18,6 @@ public class PlayerController : MonoBehaviour {
     [SerializeField, Tooltip("Max height the character will jump regardless of gravity")]
     float jumpHeight = 4;
 
-    private Collider2D boxCollider;
-
     private Rigidbody2D rigidbody;
 
     private bool grounded; // SET GROUNDED TO TRUE WHEN IT COLLIDES WITH FLOOR
@@ -27,7 +25,6 @@ public class PlayerController : MonoBehaviour {
     public Vector3 direction;
 
     void Start() {
-        boxCollider = GetComponent<Collider2D>();
         rigidbody = GetComponent<Rigidbody2D>();
         pointInDirection(Vector3.right);
     }
