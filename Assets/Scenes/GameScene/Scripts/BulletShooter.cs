@@ -18,7 +18,9 @@ public class BulletShooter : MonoBehaviour
     {
         if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
         {
-            Instantiate(bulletPrefab, transform);
+            GameObject bulletObject = Instantiate(bulletPrefab);
+            bulletObject.transform.position = this.transform.position;
+            bulletObject.transform.position += Vector3.left;
         }
     }
 }
