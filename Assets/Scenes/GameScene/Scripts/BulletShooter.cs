@@ -18,9 +18,11 @@ public class BulletShooter : MonoBehaviour
     {
         if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
         {
+            Vector3 myDirection = GetComponent<PlayerController>().direction;
             GameObject bulletObject = Instantiate(bulletPrefab);
             bulletObject.transform.position = this.transform.position;
-            bulletObject.transform.position += GetComponent<PlayerController>().direction;
+            bulletObject.transform.position += myDirection;
+            bulletObject.GetComponent<BulletNyoom>().direction = myDirection; // pass direction to bulletnyoom
         }
     }
 }
