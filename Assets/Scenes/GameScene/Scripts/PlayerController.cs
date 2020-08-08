@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
 
     void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
+        pointInDirection(Vector3.right);
     }
 
     void Update() {
@@ -55,13 +56,11 @@ public class PlayerController : MonoBehaviour {
         // flips based on your velocity
         if (velocity.x > 0)
         {
-            direction = Vector3.right;
-            GetComponent<SpriteRenderer>().flipX = true;
+            pointInDirection(Vector3.right);
         }
         else if (velocity.x < 0) // specifically do nothing when x = 0
         {
-            direction = Vector3.left;
-            GetComponent<SpriteRenderer>().flipX = false;
+            pointInDirection(Vector3.left);
         }
 
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
@@ -85,5 +84,11 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void pointInDirection(Vector3 newDirection)
+    {
+        direction = newDirection;
+        GetComponent<SpriteRenderer>().flipX = newDirection == Vector3.right; // flip if you wanna face right
     }
 }
