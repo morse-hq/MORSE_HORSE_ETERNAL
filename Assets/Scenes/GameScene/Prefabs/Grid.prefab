@@ -128,7 +128,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 4464763340926564179}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 634d761afdfc3514288e49625ba98b1f, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grayscaleOnPause: 1
-  normalMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  freezeLocOnPause: 0
   grayscaleMaterial: {fileID: 2100000, guid: 8bab8633a4d1a454392e0054a83ab0b7, type: 2}
 --- !u!1 &7177041636791233818
 GameObject:
