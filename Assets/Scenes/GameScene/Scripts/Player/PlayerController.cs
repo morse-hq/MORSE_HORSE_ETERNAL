@@ -24,8 +24,11 @@ public class PlayerController : MonoBehaviour {
 
     private bool grounded; // SET GROUNDED TO TRUE WHEN IT COLLIDES WITH FLOOR
 
+    public Vector3 direction;
+
     void Start() {
         boxCollider = GetComponent<BoxCollider2D>();
+        pointInDirection(Vector3.right);
     }
 
     void Update() {
@@ -49,6 +52,16 @@ public class PlayerController : MonoBehaviour {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
         }
 
+        // flips based on your velocity
+        if (velocity.x > 0)
+        {
+            pointInDirection(Vector3.right);
+        }
+        else if (velocity.x < 0) // specifically do nothing when x = 0
+        {
+            pointInDirection(Vector3.left);
+        }
+
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
         transform.Translate(velocity * Time.deltaTime);
         grounded = false;
@@ -70,5 +83,11 @@ public class PlayerController : MonoBehaviour {
                 }
             }
         }
+    }
+
+    private void pointInDirection(Vector3 newDirection)
+    {
+        direction = newDirection;
+        GetComponent<SpriteRenderer>().flipX = newDirection == Vector3.right; // flip if you wanna face right
     }
 }

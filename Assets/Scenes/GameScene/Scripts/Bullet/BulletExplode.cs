@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BulletShooter : MonoBehaviour
+public class BulletExplode : MonoBehaviour
 {
-    public GameObject bulletPrefab;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +13,11 @@ public class BulletShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown((int)MouseButton.LeftMouse))
-        {
-            Instantiate(bulletPrefab, transform);
-        }
+        
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Wall")) Destroy(this.gameObject);
     }
 }
