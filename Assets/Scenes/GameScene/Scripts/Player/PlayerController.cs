@@ -32,58 +32,43 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        // Jumping
-        if (grounded) {
-            velocity.y = 0;
-            if (Input.GetButtonDown("Jump")) {
-                // Calculate the velocity required to achieve the target jump height
-                velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
-            }
-        }
+        // // Jumping
+        // if (grounded) {
+        //     velocity.y = 0;
+        //     if (Input.GetButtonDown("Jump")) {
+        //         // Calculate the velocity required to achieve the target jump height
+        //         velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
+        //     }
+        // }
 
         float acceleration = grounded ? walkAcceleration : airAcceleration;
         float deceleration = grounded ? groundDeceleration : 0;
 
-        // Moving left/right
-        float moveInput = Input.GetAxisRaw("Horizontal");
-        if (moveInput != 0) {
-            velocity.x = Mathf.MoveTowards(velocity.x, speed * moveInput, acceleration * Time.deltaTime);
+        // Jumping
+        float verticalInput = Input.GetAxisRaw("Jump");
+        if (velocity.y == 0) {
+            // Calculate the velocity required to achieve the target jump height
+            velocity.y = Mathf.Sqrt(2 * jumpHeight * Mathf.Abs(Physics2D.gravity.y));
         }
-        else {
+
+        // Moving left/right
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        if (horizontalInput != 0) {
+            velocity.x = Mathf.MoveTowards(velocity.x, speed * horizontalInput, acceleration * Time.deltaTime);
+        } else {
             velocity.x = Mathf.MoveTowards(velocity.x, 0, deceleration * Time.deltaTime);
         }
 
         // flips based on your velocity
-        if (velocity.x > 0)
-        {
+        if (velocity.x > 0) {
             pointInDirection(Vector3.right);
-        }
-        else if (velocity.x < 0) // specifically do nothing when x = 0
-        {
+        } else if (velocity.x < 0) { // specifically do nothing when x = 0
             pointInDirection(Vector3.left);
         }
 
         velocity.y += Physics2D.gravity.y * Time.deltaTime;
         transform.Translate(velocity * Time.deltaTime);
         grounded = false;
-
-        Collider2D[] hits = Physics2D.OverlapBoxAll(transform.position, boxCollider.size, 0);
-
-        foreach (Collider2D hit in hits) {
-            if (hit == boxCollider) {
-                continue;
-            }
-
-            ColliderDistance2D colliderDistance = hit.Distance(boxCollider);
-            if (colliderDistance.isOverlapped) {
-                transform.Translate(colliderDistance.pointA - colliderDistance.pointB);
-
-                // If intersect an object beneath us 
-                if (Vector2.Angle(colliderDistance.normal, Vector2.up) < 90 && velocity.y < 0) {
-                    grounded = true;
-                }
-            }
-        }
     }
 
     private void pointInDirection(Vector3 newDirection)
