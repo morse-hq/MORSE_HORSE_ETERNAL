@@ -18,12 +18,21 @@ public class MusicHandler : MonoBehaviour
         pausedMusic = GetComponent<AudioSource>();
     }
 
-    public void PlayMusic() {
+    public void PlayPausedMusic() {
+        if (pausedMusic.isPlaying) return;
+        pausedMusic.Play();
+    }
+
+    public void PlayUnpausedMusic() {
         if (unpausedMusic.isPlaying) return;
         unpausedMusic.Play();
     }
 
-    public void StopMusic() {
+    public void StopPausedMusic() {
+        unpausedMusic.Stop();
+    }
+
+    public void StopUnpausedMusic() {
         unpausedMusic.Stop();
     }
 }
