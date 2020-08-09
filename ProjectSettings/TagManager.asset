@@ -7,8 +7,6 @@ TagManager:
   - Wall
   - Exit
   - MenuMusic
-  - PausedMusic
-  - Unpaused Music
   layers:
   - Default
   - TransparentFX
