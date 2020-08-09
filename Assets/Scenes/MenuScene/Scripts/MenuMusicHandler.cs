@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicHandler : MonoBehaviour {
+public class MenuMusicHandler : MonoBehaviour {
     private AudioSource menuMusic;
 
     // Start is called before the first frame update
     void Start() {
-        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MusicHandler>().PlayMusic();
+        GameObject.FindGameObjectWithTag("MenuMusic").GetComponent<MenuMusicHandler>().PlayMusic();
     }
 
     private void Awake() {
